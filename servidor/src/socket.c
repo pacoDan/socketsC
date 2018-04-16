@@ -25,6 +25,7 @@ Socket crear_socket(char * ip, char * port) {
 
 	//error
 	if (sock.socket == -1) {
+		cerrar_socket(sock);
 		perror("server: socket");
 		exit(EXIT_FAILURE);
 	}
@@ -38,10 +39,12 @@ void conectar(Socket sock) {
 		perror("client: connect");
 		exit(EXIT_FAILURE);
 	}
+	freeaddrinfo(sock.server_info);
 }
 
 void cerrar_socket(Socket sock)
 {
+	freeaddrinfo(sock.server_info);
 	close(sock.socket);
 }
 
