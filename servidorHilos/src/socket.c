@@ -56,7 +56,6 @@ void cerrar_socket(Socket sock)
 int Lee_Socket (int fd, char *Datos, int Longitud)
 {
 	int Leido = 0;
-	int Aux = 0;
 
 	/*
 	* Comprobacion de que los parametros de entrada son correctos
@@ -65,28 +64,18 @@ int Lee_Socket (int fd, char *Datos, int Longitud)
 		return -1;
 
 	/*
-	* Mientras no hayamos leido todos los datos solicitados
+	* Leemos datos del socket
 	*/
 	while (Leido < Longitud)
 	{
-		Aux = read (fd, Datos + Leido, Longitud - Leido);
-		if (Aux > 0)
-		{
+	Leido = recv(fd,Datos,Longitud,MSG_WAITALL);
 			/*
-			* Si hemos conseguido leer datos, incrementamos la variable
-			* que contiene los datos leidos hasta el momento
-			*/
-			Leido = Leido + Aux;
-		}
-		else
-		{
-			/*
-			* Si read devuelve 0, es que se ha cerrado el socket. Devolvemos
+			* Si recv devuelve 0, es que se ha cerrado el socket. Devolvemos
 			* los caracteres leidos hasta ese momento
 			*/
-			if (Aux == 0)
+			if (Leido == 0)
 				return Leido;
-			if (Aux == -1)
+			if (Leido == -1)
 			{
 				/*
 				* En caso de error, la variable errno nos indica el tipo
@@ -112,8 +101,6 @@ int Lee_Socket (int fd, char *Datos, int Longitud)
 				}
 			}
 		}
-	}
-
 	/*
 	* Se devuelve el total de los caracteres leidos
 	*/
@@ -141,7 +128,8 @@ int Escribe_Socket (int fd, char *Datos, int Longitud)
 	*/
 	while (Escrito < Longitud)
 	{
-		Aux = write (fd, Datos + Escrito, Longitud - Escrito);
+		Aux = send(fd, Datos + Escrito, Longitud - Escrito, 0);
+
 		if (Aux > 0)
 		{
 			/*
