@@ -1,0 +1,8 @@
+GCC C Compiler
+../../socket
+
+GCC C Linker
+socket
+-Wl,-rpath=../../socket/Socket -L../../socket/Socket
+
+Run configuration apuntar a la carpeta donde se genera los binarios/makefile

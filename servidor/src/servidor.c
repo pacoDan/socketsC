@@ -7,9 +7,8 @@
  Description : Hello World in C, Ansi-style
  ============================================================================
  */
-
-#include "socket.h"
-#include "socketServer.h"
+#include <socket/socket.h>
+#include <socket/socketServer.h>
 
 /*
  * Programa principal.

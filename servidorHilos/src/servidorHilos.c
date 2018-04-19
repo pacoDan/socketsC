@@ -8,8 +8,8 @@
  ============================================================================
  */
 
-#include "socket.h"
-#include "socketServer.h"
+#include <socket/socket.h>
+#include <socket/socketServer.h>
 #include <pthread.h>
 #include <sys/ioctl.h>
 

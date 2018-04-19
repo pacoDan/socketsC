@@ -5,7 +5,7 @@
  *      Author: utnso
  */
 
-#include "socket.h"
+#include <socket/socket.h>
 
 //Ejemplo de un Cliente que se conecta al Servidor: 127.0.0.1, Puerto: 8080
 int main(void)
